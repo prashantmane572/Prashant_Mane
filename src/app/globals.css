@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f8fafc; /* Soft light gray */
+  --color-foreground: #0f172a;
+  
+  --color-primary: #1e3a8a; /* Deep blue */
+  --color-primary-foreground: #ffffff;
+  
+  --color-accent: #3b82f6; /* Electric blue */
+  --color-accent-foreground: #ffffff;
+  
+  --color-highlight: #facc15; /* Soft BI yellow */
+  
+  --color-card: rgba(255, 255, 255, 0.8);
+  --color-card-foreground: #0f172a;
+
+  --color-border: #e2e8f0;
+
+  --font-sans: "Inter", "Poppins", sans-serif;
+  
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.375rem;
+
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* Light theme as default, but force it in root just in case */
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Base custom utilities */
+@layer utilities {
+  .glass-card {
+    background: var(--color-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-glass);
+    border-radius: var(--radius-lg);
+  }
+}
