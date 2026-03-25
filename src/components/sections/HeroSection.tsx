@@ -14,7 +14,7 @@ export function HeroSection() {
       <HeroSlideshow />
 
       <div className="container mx-auto px-4 relative z-20 flex flex-col items-center text-center max-w-5xl">
-        
+
         <FadeIn delay={0.2} direction="down">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-semibold mb-8 shadow-sm">
             <span className="relative flex h-2.5 w-2.5">
@@ -27,27 +27,27 @@ export function HeroSection() {
 
         <FadeIn delay={0.4} direction="up" className="w-full">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-6">
-            Transforming <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Business Data</span> <br className="hidden md:block"/> into Powerful Insights
+            Transforming <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Business Data</span> <br className="hidden md:block" /> into Powerful Insights
           </h1>
         </FadeIn>
 
         <FadeIn delay={0.6} direction="up">
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-black font-bold max-w-2xl mx-auto mb-10 leading-relaxed">
             Power BI Developer | SQL Analyst | SAP HANA <br className="hidden md:block" />
             Empowering organizations with intelligent data modeling and BI solutions.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.8} direction="up" className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
-          <Link 
-            href="#projects" 
+          <Link
+            href="#projects"
             className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
           >
             Explore Projects
             <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
           </Link>
-          <Link 
-            href="#contact" 
+          <Link
+            href="#contact"
             className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-slate-900 border border-slate-200 font-medium hover:bg-slate-50 transition-all shadow-sm flex items-center justify-center"
           >
             Hire Me
@@ -63,7 +63,7 @@ export function HeroSection() {
             { label: "Reporting Time Reduced", value: "20%" },
           ].map((kpi, i) => (
             <FadeIn key={i} delay={1 + (i * 0.1)} direction="up">
-              <motion.div 
+              <motion.div
                 whileHover={{ y: -5 }}
                 className="bg-white/70 backdrop-blur-lg border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-5 text-center flex flex-col justify-center items-center"
               >
@@ -77,7 +77,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Down Indicator */}
-      <motion.div 
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
@@ -90,7 +90,7 @@ export function HeroSection() {
         >
           <ChevronDown size={20} />
         </motion.div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

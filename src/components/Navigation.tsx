@@ -69,14 +69,14 @@ export function Navigation() {
         </nav>
 
         {/* CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* <div className="hidden md:flex items-center gap-4">
           <Link
             href="/contact"
             className="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-accent transition-all shadow-[0_4px_14px_0_rgba(30,58,138,0.39)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.39)] hover:-translate-y-0.5"
           >
             Hire Me
           </Link>
-        </div>
+        </div> */}
 
         {/* Mobile Menu Toggle */}
         <button
