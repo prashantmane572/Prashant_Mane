@@ -40,7 +40,7 @@ export default function AboutPage() {
           </section>
 
           {/* Personal Story Section */}
-          <section className="py-24 bg-white">
+          <section className="py-24 bg-white overflow-hidden">
             <div className="container mx-auto px-4 max-w-5xl">
               <div className="grid md:grid-cols-12 gap-12 items-center">
                 <div className="md:col-span-5 relative">

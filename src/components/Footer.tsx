@@ -21,10 +21,10 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start">
             <h4 className="font-semibold text-slate-900 mb-4">Quick Links</h4>
             <nav className="flex flex-col gap-2">
-              <Link href="#portfolio" className="text-sm text-slate-500 hover:text-accent transition-colors">Portfolio</Link>
-              <Link href="#services" className="text-sm text-slate-500 hover:text-accent transition-colors">Services</Link>
-              <Link href="#about" className="text-sm text-slate-500 hover:text-accent transition-colors">About</Link>
-              <Link href="#contact" className="text-sm text-slate-500 hover:text-accent transition-colors">Contact</Link>
+              <Link href="/portfolio" className="text-sm text-slate-500 hover:text-accent transition-colors">Portfolio</Link>
+              <Link href="/services" className="text-sm text-slate-500 hover:text-accent transition-colors">Services</Link>
+              <Link href="/about" className="text-sm text-slate-500 hover:text-accent transition-colors">About</Link>
+              <Link href="/contact" className="text-sm text-slate-500 hover:text-accent transition-colors">Contact</Link>
             </nav>
           </div>
 

@@ -108,11 +108,11 @@ export function Navigation() {
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-gray-100 mt-2">
+              <div className="pt-4 border-t border-gray-100 mt-2 pb-2">
                 <Link
-                  href="#contact"
+                  href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex justify-center w-full px-5 py-3 rounded-xl bg-primary text-white font-medium hover:bg-accent transition-all"
+                  className="flex justify-center w-full px-5 py-3 rounded-xl bg-primary text-white font-bold hover:bg-accent transition-all shadow-lg shadow-blue-900/20"
                 >
                   Hire Me
                 </Link>
