@@ -34,8 +34,8 @@ export function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || pathname !== "/" // Always solid on inner pages
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3"
-          : "bg-transparent py-5"
+        ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3"
+        : "bg-transparent py-5"
         }`}
     >
       <div className="container mx-auto px-4 md:px-8 max-w-7xl flex items-center justify-between">
@@ -45,8 +45,8 @@ export function Navigation() {
             <BarChart2 size={24} />
           </div>
           <span className={`font-bold text-xl tracking-tight ${pathname !== "/" || isScrolled ? "text-slate-900" : "text-white"}`}>
-            {/* Prashant<span className="text-accent">.</span>Mane */}
-            Demo<span className="text-accent">.</span>Website
+            Prashant<span className="text-accent">.</span>Mane
+            {/* Demo<span className="text-accent">.</span>Website */}
           </span>
         </Link>
 
