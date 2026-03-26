@@ -8,8 +8,8 @@ const VIDEOS = [
   "https://videos.pexels.com/video-files/7804935/7804935-hd_1920_1080_25fps.mp4",
   "https://videos.pexels.com/video-files/7947452/7947452-hd_1920_1080_30fps.mp4",
   // Fallbacks for the ones protected by intense anti-bot checks (you will need to download them manually)
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+  "https://www.pexels.com/download/video/36394028/",
+  "https://www.pexels.com/download/video/7552429/",
 ];
 
 export function HeroSlideshow() {
@@ -27,7 +27,7 @@ export function HeroSlideshow() {
     <div className="absolute inset-0 z-0 bg-slate-900 w-full h-full overflow-hidden">
       {/* Light glass overlay so the video dominates the screen but text remains readable */}
       <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px] z-20 pointer-events-none" />
-      
+
       <AnimatePresence>
         <motion.video
           key={currentIndex}
@@ -50,10 +50,9 @@ export function HeroSlideshow() {
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className={`h-1.5 transition-all duration-500 rounded-full ${
-              idx === currentIndex ? "w-8 bg-primary" : "w-4 bg-slate-300 hover:bg-slate-400"
-            }`}
-             aria-label={`Go to slide ${idx + 1}`}
+            className={`h-1.5 transition-all duration-500 rounded-full ${idx === currentIndex ? "w-8 bg-primary" : "w-4 bg-slate-300 hover:bg-slate-400"
+              }`}
+            aria-label={`Go to slide ${idx + 1}`}
           />
         ))}
       </div>
