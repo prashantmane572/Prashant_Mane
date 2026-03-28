@@ -16,12 +16,24 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-between w-full">
         <HeroSection />
         
-        <div className="w-full relative z-10 min-h-screen">
+        <div className="w-full relative z-10 bg-white shadow-xl min-h-screen">
           
           <MetricsSection />
 
-          {/* Process / Value Prop Section */}
-          <section className="py-24 bg-black/40 backdrop-blur-sm text-white relative border-t border-white/10 overflow-hidden">
+          {/* Process / Value Prop Section with Video */}
+          <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+            {/* Background Video */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <video 
+                autoPlay 
+                muted 
+                loop 
+                playsInline 
+                className="w-full h-full object-cover"
+                src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent" />
+            </div>
 
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
               <FadeIn>
@@ -55,7 +67,7 @@ export default function Home() {
           <ServicesSection />
           
           {/* Featured Projects Preview */}
-          <div className="bg-black/40 backdrop-blur-sm pt-12 pb-24 border-t border-white/10">
+          <div className="bg-slate-50 pt-12 pb-24 border-t border-slate-200">
              <div className="flex flex-col items-center mb-[-60px] relative z-20">
                 <FadeIn>
                   <Link href="/projects" className="inline-flex items-center gap-2 bg-slate-900 hover:bg-primary text-white px-8 py-4 rounded-full font-bold transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">

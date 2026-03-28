@@ -12,10 +12,6 @@ export const metadata: Metadata = {
   description: "Portfolio of Prashant Mane - Power BI Developer, SQL Analyst, and Data Modeling Expert specializing in ERP & Business Data Insights.",
 };
 
-import dynamic from 'next/dynamic';
-
-const Scene = dynamic(() => import('@/components/canvas/Scene').then(mod => mod.Scene), { ssr: false });
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,8 +22,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} antialiased scroll-smooth`}
     >
-      <body className="min-h-screen bg-slate-950 text-foreground flex flex-col font-sans">
-        <Scene />
+      <body className="min-h-screen bg-background text-foreground flex flex-col font-sans">
         {children}
       </body>
     </html>
