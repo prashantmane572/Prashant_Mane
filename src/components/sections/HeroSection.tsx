@@ -5,18 +5,14 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { FadeIn } from "@/components/AnimatedCard";
 
-import { HeroSlideshow } from "@/components/sections/HeroSlideshow";
-
 export function HeroSection() {
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center pt-20 overflow-hidden">
-      {/* Dynamic Video Slideshow Background */}
-      <HeroSlideshow />
 
       <div className="container mx-auto px-4 relative z-20 flex flex-col items-center text-center max-w-5xl">
 
         <FadeIn delay={0.2} direction="down">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-semibold mb-8 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-300 text-sm font-semibold mb-8 shadow-sm">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
@@ -26,13 +22,13 @@ export function HeroSection() {
         </FadeIn>
 
         <FadeIn delay={0.4} direction="up" className="w-full">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-6">
-            Transforming <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Business Data</span> <br className="hidden md:block" /> into Powerful Insights
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6 drop-shadow-2xl">
+            Transforming <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Business Data</span> <br className="hidden md:block" /> into Powerful Insights
           </h1>
         </FadeIn>
 
         <FadeIn delay={0.6} direction="up">
-          <p className="text-lg md:text-xl text-black font-bold max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-300 font-medium max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-md">
             Power BI Developer | SQL Analyst | SAP HANA <br className="hidden md:block" />
             Empowering organizations with intelligent data modeling and BI solutions.
           </p>
@@ -41,14 +37,14 @@ export function HeroSection() {
         <FadeIn delay={0.8} direction="up" className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
           <Link
             href="#projects"
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group border border-blue-500/50"
           >
             Explore Projects
             <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
           </Link>
           <Link
-            href="#contact"
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-slate-900 border border-slate-200 font-medium hover:bg-slate-50 transition-all shadow-sm flex items-center justify-center"
+            href="/contact"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 font-medium hover:bg-white/20 transition-all shadow-sm flex items-center justify-center"
           >
             Hire Me
           </Link>
@@ -65,10 +61,10 @@ export function HeroSection() {
             <FadeIn key={i} delay={1 + (i * 0.1)} direction="up">
               <motion.div
                 whileHover={{ y: -5 }}
-                className="bg-white/70 backdrop-blur-lg border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl p-5 text-center flex flex-col justify-center items-center"
+                className="bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl rounded-2xl p-5 text-center flex flex-col justify-center items-center"
               >
-                <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">{kpi.value}</div>
-                <div className="text-xs md:text-sm text-slate-500 font-medium">{kpi.label}</div>
+                <div className="text-2xl md:text-3xl font-bold text-white mb-1 drop-shadow-lg">{kpi.value}</div>
+                <div className="text-xs md:text-sm text-slate-400 font-medium">{kpi.label}</div>
               </motion.div>
             </FadeIn>
           ))}

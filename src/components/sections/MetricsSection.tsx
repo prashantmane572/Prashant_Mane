@@ -45,7 +45,7 @@ export function MetricsSection() {
   ];
 
   return (
-    <section className="py-24 bg-slate-900 relative overflow-hidden">
+    <section className="py-24 bg-transparent relative overflow-hidden">
       
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 opacity-20">

@@ -34,7 +34,7 @@ export function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || pathname !== "/" // Always solid on inner pages
-        ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3"
+        ? "bg-slate-950/80 backdrop-blur-md shadow-sm border-b border-white/10 py-3"
         : "bg-transparent py-5"
         }`}
     >
@@ -44,9 +44,9 @@ export function Navigation() {
           <div className="bg-primary text-white p-2 rounded-lg group-hover:bg-accent transition-colors">
             <BarChart2 size={24} />
           </div>
-          <span className={`font-bold text-xl tracking-tight ${pathname !== "/" || isScrolled ? "text-slate-900" : "text-white"}`}>
-            Prashant<span className="text-accent">.</span>Mane
-            {/* Demo<span className="text-accent">.</span>Website */}
+          <span className={`font-bold text-xl tracking-tight text-white`}>
+            Prashant<span className="text-blue-400">.</span>Mane
+            {/* Demo<span className="text-blue-400">.</span>Website */}
           </span>
         </Link>
 
@@ -54,12 +54,12 @@ export function Navigation() {
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {
             const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
-            const textColor = pathname !== "/" || isScrolled ? "text-slate-600" : "text-white/80";
+            const textColor = "text-white/80";
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-accent ${isActive ? "text-primary font-bold" : textColor
+                className={`text-sm font-medium transition-colors hover:text-blue-400 ${isActive ? "text-white font-bold drop-shadow-[0_0_8px_rgba(96,165,250,0.8)]" : textColor
                   }`}
               >
                 {link.name}
@@ -80,7 +80,7 @@ export function Navigation() {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-foreground p-2"
+          className="md:hidden text-white p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -95,7 +95,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-gray-100 overflow-hidden"
+            className="md:hidden bg-slate-900/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
           >
             <nav className="flex flex-col px-4 py-6 gap-4">
               {navLinks.map((link) => (
@@ -103,7 +103,7 @@ export function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-medium text-gray-700 hover:text-primary p-2 rounded-md hover:bg-gray-50"
+                  className="text-base font-medium text-slate-300 hover:text-white p-2 rounded-md hover:bg-white/5"
                 >
                   {link.name}
                 </Link>
