@@ -68,15 +68,7 @@ export default function Home() {
           
           {/* Featured Projects Preview */}
           <div className="bg-slate-50 pt-12 pb-24 border-t border-slate-200">
-             <div className="flex flex-col items-center mb-[-60px] relative z-20">
-                <FadeIn>
-                  <Link href="/projects" className="inline-flex items-center gap-2 bg-slate-900 hover:bg-primary text-white px-8 py-4 rounded-full font-bold transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
-                    Explore Deep Case Studies <ArrowRight size={20} />
-                  </Link>
-                </FadeIn>
-             </div>
-             {/* We render the Projects section but it naturally shows the grid. */}
-             <ProjectsSection />
+             <ProjectsSection limit={2} />
           </div>
 
           <ContactSection />

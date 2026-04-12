@@ -23,7 +23,7 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          <ProjectsSection />
+          <ProjectsSection showViewAll={false} />
 
         </div>
       </main>

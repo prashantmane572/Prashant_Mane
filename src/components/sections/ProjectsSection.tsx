@@ -14,7 +14,7 @@ interface Project {
   image: string;
 }
 
-export function ProjectsSection() {
+export function ProjectsSection({ limit, showViewAll = true }: { limit?: number, showViewAll?: boolean }) {
   const [dynamicProjects, setDynamicProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,7 +30,10 @@ export function ProjectsSection() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const allProjects = [...dynamicProjects];
+  let allProjects = [...dynamicProjects];
+  if (limit) {
+    allProjects = allProjects.slice(0, limit);
+  }
 
   return (
     <section id="projects" className="py-24 bg-slate-50 relative overflow-hidden">
@@ -47,17 +50,19 @@ export function ProjectsSection() {
             </p>
           </FadeIn>
           
-          <FadeIn direction="right" delay={0.2}>
-            <Link 
-              href="/projects" 
-              className="group flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors"
-            >
-              View All Projects
-              <span className="bg-primary/10 p-2 rounded-full group-hover:bg-accent/10 transition-colors">
-                <ArrowUpRight size={16} />
-              </span>
-            </Link>
-          </FadeIn>
+          {showViewAll && (
+            <FadeIn direction="right" delay={0.2}>
+              <Link 
+                href="/projects" 
+                className="group flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors"
+              >
+                View All Projects
+                <span className="bg-primary/10 p-2 rounded-full group-hover:bg-accent/10 transition-colors">
+                  <ArrowUpRight size={16} />
+                </span>
+              </Link>
+            </FadeIn>
+          )}
         </div>
 
         {isLoading ? (
