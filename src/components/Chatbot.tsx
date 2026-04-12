@@ -26,7 +26,7 @@ export function Chatbot() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
     
-    sendMessage({ content: input });
+    sendMessage({ text: input });
     setInput("");
   };
 
@@ -81,7 +81,7 @@ export function Chatbot() {
                         : "bg-white border border-slate-200 text-slate-700 rounded-tl-none whitespace-pre-wrap"
                     }`}
                   >
-                    {m.content}
+                    {m.parts ? m.parts.map((part, i) => part.type === 'text' ? part.text : '').join('') : (m as any).text || (m as any).content}
                   </div>
                 </div>
               ))}
