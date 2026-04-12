@@ -1,25 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { FadeIn, AnimatedCard } from "@/components/AnimatedCard";
 
+interface Project {
+  id?: string;
+  title: string;
+  summary: string;
+  tools: string | string[];
+  image: string;
+}
+
 export function ProjectsSection() {
-  const projects = [
-    {
-      title: "Inventory & Delivery Analytics Dashboard",
-      summary: "End-to-end Power BI solution for real-time inventory tracking and delivery SLA monitoring.",
-      tools: ["Power BI", "SQL Server", "DAX"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "Sales & Operations Analytics",
-      summary: "Comprehensive dashboard unifying ERP data (SAP HANA) to discover operational bottlenecks.",
-      tools: ["SAP HANA", "Power Query", "Data Modeling"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
-    }
-  ];
+  const [dynamicProjects, setDynamicProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/projects")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setDynamicProjects(data);
+        }
+      })
+      .catch(err => console.error("Failed to load projects:", err))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  const allProjects = [...dynamicProjects];
 
   return (
     <section id="projects" className="py-24 bg-slate-50 relative overflow-hidden">
@@ -49,46 +60,58 @@ export function ProjectsSection() {
           </FadeIn>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {projects.map((project, index) => (
-            <FadeIn key={index} delay={0.2 + (index * 0.1)} direction="up">
-              <AnimatedCard className="p-0 overflow-hidden group border-0 shadow-lg hover:shadow-xl">
-                <div className="relative h-64 overflow-hidden bg-slate-200">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10" />
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4 z-20 flex gap-2">
-                    {project.tools.map((tool, i) => (
-                      <span key={i} className="px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-semibold text-slate-800 rounded-full shadow-sm">
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="p-6 md:p-8 relative bg-white">
-                  <h4 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h4>
-                  <p className="text-slate-600 mb-6 leading-relaxed">
-                    {project.summary}
-                  </p>
-                  
-                  <Link 
-                    href={`/projects/${index}`}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-primary transition-colors uppercase tracking-wider"
-                  >
-                    Read Case Study
-                    <ArrowUpRight size={16} />
-                  </Link>
-                </div>
-              </AnimatedCard>
-            </FadeIn>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center py-20">
+            <Loader2 className="animate-spin text-primary" size={40} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {allProjects.map((project, index) => {
+              const toolsArray = Array.isArray(project.tools) 
+                ? project.tools 
+                : project.tools.split(',').map(t => t.trim());
+
+              return (
+                <FadeIn key={index} delay={0.1 * (index % 4)} direction="up">
+                  <AnimatedCard className="p-0 overflow-hidden group border-0 shadow-lg hover:shadow-xl h-full flex flex-col">
+                    <div className="relative h-64 overflow-hidden bg-slate-200 shrink-0">
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10" />
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
+                        {toolsArray.map((tool, i) => (
+                          <span key={i} className="px-3 py-1 bg-white/90 backdrop-blur-sm text-[10px] font-bold uppercase text-slate-700 rounded-full shadow-sm border border-slate-100">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="p-6 md:p-8 relative bg-white flex-1 flex flex-col">
+                      <h4 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h4>
+                      <p className="text-slate-600 mb-6 leading-relaxed flex-1">
+                        {project.summary}
+                      </p>
+                      
+                      <Link 
+                        href={`/projects/${project.id}`}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-primary transition-colors uppercase tracking-wider mt-auto"
+                      >
+                        Read Case Study
+                        <ArrowUpRight size={16} />
+                      </Link>
+                    </div>
+                  </AnimatedCard>
+                </FadeIn>
+              );
+            })}
+          </div>
+        )}
 
       </div>
     </section>

@@ -2,26 +2,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-
-// Mock data. In a real app this would come from Prisma DB based on the ID.
-const mockProjects = [
-  {
-    title: "Inventory & Delivery Analytics Dashboard",
-    summary: "End-to-end Power BI solution for real-time inventory tracking and delivery SLA monitoring.",
-    content: "This project addresses the critical need for supply chain visibility. By integrating directly with enterprise ERP data via SQL Server, this dashboard provides real-time inventory depletion rates, delivery time SLA adherence, and geographical distribution of bottlenecks. The solution reduced reporting time by 20% and improved on-time delivery by 15%.",
-    tools: ["Power BI", "SQL Server", "DAX", "Power Query"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOGZlZG..." // Sample placeholder
-  },
-  {
-    title: "Sales & Operations Analytics",
-    summary: "Comprehensive dashboard unifying ERP data (SAP HANA) to discover operational bottlenecks.",
-    content: "Unifying disparate data sources across regional operations, this dashboard serves as the executive summary for C-level stakeholders. Connecting directly to SAP HANA, it provides live feeds of regional P&L, store performace, and operations efficiency metrics.",
-    tools: ["SAP HANA", "Power Query", "Data Modeling", "Excel"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-    embedUrl: "https://app.powerbi.com/view?r=placeholder" // Sample placeholder
-  }
-];
+import { prisma } from "@/lib/prisma";
+import { notFound } from "next/navigation";
 
 export default async function ProjectDetailPage({
   params,
@@ -29,8 +11,17 @@ export default async function ProjectDetailPage({
   params: Promise<{ id: string }>
 }) {
   const resolvedParams = await params;
-  const projectIndex = parseInt(resolvedParams.id, 10);
-  const project = mockProjects[projectIndex] || mockProjects[0];
+  const project = await prisma.project.findUnique({
+    where: { id: resolvedParams.id }
+  });
+
+  if (!project) {
+    notFound();
+  }
+
+  const toolsArray = Array.isArray(project.tools)
+    ? project.tools
+    : project.tools.split(',').map((t: string) => t.trim());
 
   return (
     <>
@@ -46,7 +37,7 @@ export default async function ProjectDetailPage({
           </h1>
           
           <div className="flex flex-wrap gap-2 mb-8">
-            {project.tools.map((tool, i) => (
+            {toolsArray.map((tool: string, i: number) => (
               <span key={i} className="px-4 py-1.5 bg-blue-50 text-blue-700 text-sm font-semibold rounded-full border border-blue-100">
                 {tool}
               </span>

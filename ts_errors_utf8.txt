@@ -1,0 +1,3 @@
+﻿src/app/api/chat/route.ts(17,19): error TS2551: Property 'toDataStreamResponse' does not exist on type 'StreamTextResult<ToolSet, Output<string, string, never>>'. Did you mean 'toTextStreamResponse'?
+src/components/Chatbot.tsx(4,25): error TS2307: Cannot find module 'ai/react' or its corresponding type declarations.
+src/components/Chatbot.tsx(54,30): error TS7006: Parameter 'm' implicitly has an 'any' type.

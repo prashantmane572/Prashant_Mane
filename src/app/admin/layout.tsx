@@ -19,9 +19,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <LayoutDashboard size={20} />
             Dashboard
           </Link>
-          <Link href="/admin/projects" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-colors cursor-not-allowed opacity-50">
+          <Link href="/admin/projects" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-colors">
             <Briefcase size={20} />
-            Projects (Soon)
+            Projects
           </Link>
           <Link href="/admin/blogs" className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-colors cursor-not-allowed opacity-50">
             <FileText size={20} />

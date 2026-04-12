@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Chatbot } from "@/components/Chatbot";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -24,6 +25,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground flex flex-col font-sans">
         {children}
+        <Chatbot />
       </body>
     </html>
   );
