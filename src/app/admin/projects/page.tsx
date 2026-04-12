@@ -23,6 +23,7 @@ export default function AdminProjects() {
   const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [zipFile, setZipFile] = useState<File | null>(null);
   
   // Feedback State
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
@@ -80,6 +81,7 @@ export default function AdminProjects() {
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingProject(null);
+    setZipFile(null);
     setFormData({ title: "", summary: "", tools: "", image: "", githubUrl: "", zipUrl: "", content: "" });
   };
 
@@ -90,12 +92,29 @@ export default function AdminProjects() {
     const url = editingProject ? `/api/projects/${editingProject.id}` : "/api/projects";
     const method = editingProject ? "PATCH" : "POST";
 
+    let finalZipUrl = formData.zipUrl;
+
     try {
+      if (zipFile) {
+        showFeedback("Uploading ZIP file...", "success");
+        const uploadRes = await fetch(`/api/upload?filename=${encodeURIComponent(zipFile.name)}`, {
+          method: "POST",
+          body: zipFile,
+        });
+        if (!uploadRes.ok) {
+           throw new Error("Failed to upload ZIP file. Ensure Vercel Blob is configured.");
+        }
+        const blobData = await uploadRes.json();
+        finalZipUrl = blobData.url;
+      }
+
+      const payload = { ...formData, zipUrl: finalZipUrl };
+
       console.log(`Submitting ${method} request to ${url}...`);
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
       
       if (res.ok) {
@@ -107,7 +126,7 @@ export default function AdminProjects() {
         showFeedback(err.error || "Something went wrong", "error");
       }
     } catch (error) {
-      showFeedback("Failed to save project", "error");
+      showFeedback((error as Error).message || "Failed to save project", "error");
     } finally {
       setIsSubmitting(false);
     }
@@ -336,14 +355,20 @@ export default function AdminProjects() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Zip File Link (Optional)</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Zip File Upload (Optional)</label>
                     <input 
-                      type="url" 
-                      className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-slate-900 font-medium transition-all" 
-                      placeholder="https://.../file.zip"
-                      value={formData.zipUrl}
-                      onChange={(e) => setFormData({...formData, zipUrl: e.target.value})}
+                      type="file" 
+                      accept=".zip,.rar,.7z"
+                      className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-slate-900 font-medium transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-blue-50 file:text-blue-700 file:font-semibold hover:file:bg-blue-100" 
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files.length > 0) {
+                          setZipFile(e.target.files[0]);
+                        }
+                      }}
                     />
+                    {editingProject?.zipUrl && (
+                      <p className="mt-2 text-xs text-slate-500">Currently deployed: <a href={editingProject.zipUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Download</a></p>
+                    )}
                   </div>
                 </div>
               </div>
