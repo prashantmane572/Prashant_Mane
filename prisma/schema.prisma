@@ -23,7 +23,9 @@ model Project {
   title       String
   summary     String
   tools       String   // stored as JSON string or comma-separated
-  image       String
+  image       String?
+  githubUrl   String?
+  zipUrl      String?
   content     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

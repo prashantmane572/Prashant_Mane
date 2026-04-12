@@ -59,7 +59,9 @@ export async function PATCH(
         title: data.title,
         summary: data.summary,
         tools: data.tools,
-        image: data.image,
+        image: data.image || null,
+        githubUrl: data.githubUrl || null,
+        zipUrl: data.zipUrl || null,
         content: data.content
       }
     });

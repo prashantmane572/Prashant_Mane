@@ -8,7 +8,9 @@ interface Project {
   title: string;
   summary: string;
   tools: string;
-  image: string;
+  image: string | null;
+  githubUrl: string | null;
+  zipUrl: string | null;
   content: string | null;
   createdAt: string;
 }
@@ -31,6 +33,8 @@ export default function AdminProjects() {
     summary: "",
     tools: "",
     image: "",
+    githubUrl: "",
+    zipUrl: "",
     content: ""
   });
 
@@ -65,7 +69,9 @@ export default function AdminProjects() {
       title: project.title,
       summary: project.summary,
       tools: project.tools,
-      image: project.image,
+      image: project.image || "",
+      githubUrl: project.githubUrl || "",
+      zipUrl: project.zipUrl || "",
       content: project.content || ""
     });
     setIsModalOpen(true);
@@ -74,7 +80,7 @@ export default function AdminProjects() {
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingProject(null);
-    setFormData({ title: "", summary: "", tools: "", image: "", content: "" });
+    setFormData({ title: "", summary: "", tools: "", image: "", githubUrl: "", zipUrl: "", content: "" });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -203,7 +209,7 @@ export default function AdminProjects() {
                       <div className="flex items-center gap-5">
                         <div className="w-20 h-14 rounded-xl overflow-hidden border border-slate-200 shadow-sm shrink-0 bg-slate-100 relative group-hover:shadow-md transition-shadow">
                           <img 
-                            src={project.image} 
+                            src={project.image || "https://placehold.co/300x200?text=No+Preview"} 
                             alt="" 
                             className="w-full h-full object-cover"
                             onError={(e) => {
@@ -307,14 +313,36 @@ export default function AdminProjects() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Image Reference</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Image Reference (Optional)</label>
                     <input 
-                      required
                       type="text" 
                       className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-slate-900 font-medium transition-all" 
-                      placeholder="Unsplash or direct URL"
+                      placeholder="Image URL"
                       value={formData.image}
                       onChange={(e) => setFormData({...formData, image: e.target.value})}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Github Link (Optional)</label>
+                    <input 
+                      type="url" 
+                      className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-slate-900 font-medium transition-all" 
+                      placeholder="https://github.com/..."
+                      value={formData.githubUrl}
+                      onChange={(e) => setFormData({...formData, githubUrl: e.target.value})}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Zip File Link (Optional)</label>
+                    <input 
+                      type="url" 
+                      className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none text-slate-900 font-medium transition-all" 
+                      placeholder="https://.../file.zip"
+                      value={formData.zipUrl}
+                      onChange={(e) => setFormData({...formData, zipUrl: e.target.value})}
                     />
                   </div>
                 </div>

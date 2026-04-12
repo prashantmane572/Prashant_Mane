@@ -48,18 +48,30 @@ export default async function ProjectDetailPage({
         {/* Dashboard Embed Section */}
         <section className="bg-slate-900 py-16 px-4 border-y border-slate-800">
           <div className="container mx-auto max-w-6xl">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
               <h2 className="text-xl font-bold text-white">Live Dashboard Viewer</h2>
-              <a href="#" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium">
-                Open in Power BI <ExternalLink size={16} />
-              </a>
+              <div className="flex flex-wrap items-center gap-6">
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm font-medium">
+                    View on GitHub <ExternalLink size={16} />
+                  </a>
+                )}
+                {project.zipUrl && (
+                  <a href={project.zipUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm font-medium">
+                    Download ZIP <ExternalLink size={16} />
+                  </a>
+                )}
+                <a href="#" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium">
+                  Open in Power BI <ExternalLink size={16} />
+                </a>
+              </div>
             </div>
             
             <div className="w-full aspect-video bg-slate-800 rounded-xl border border-slate-700 shadow-2xl overflow-hidden flex items-center justify-center relative">
               {/* In a real implementation, you would use an iframe here:
                   <iframe title="Report Section" src={project.embedUrl} frameBorder="0" allowFullScreen="true" className="w-full h-full"></iframe>
               */}
-              <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style={{ backgroundImage: `url(${project.image})`}}></div>
+              <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style={{ backgroundImage: `url(${project.image || 'https://placehold.co/1200x800?text=No+Preview'})`}}></div>
               <div className="text-center relative z-10 z">
                 <div className="text-slate-400 mb-2 font-medium">Interactive Embed Placeholder</div>
                 <div className="text-slate-500 text-sm max-w-sm mx-auto">This iframe container connects securely to Power BI Service via token authentication or direct embed links.</div>

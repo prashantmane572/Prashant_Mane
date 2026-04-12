@@ -82,7 +82,7 @@ export function ProjectsSection({ limit, showViewAll = true }: { limit?: number,
                     <div className="relative h-64 overflow-hidden bg-slate-200 shrink-0">
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10" />
                       <img 
-                        src={project.image} 
+                        src={project.image || "https://placehold.co/600x400?text=No+Image"} 
                         alt={project.title} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
