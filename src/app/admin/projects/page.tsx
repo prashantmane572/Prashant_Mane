@@ -102,7 +102,8 @@ export default function AdminProjects() {
           body: zipFile,
         });
         if (!uploadRes.ok) {
-           throw new Error("Failed to upload ZIP file. Ensure Vercel Blob is configured.");
+           const errBody = await uploadRes.json().catch(() => ({}));
+           throw new Error(`Upload Failed: ${errBody.details || errBody.error || "Unknown Error"}`);
         }
         const blobData = await uploadRes.json();
         finalZipUrl = blobData.url;
