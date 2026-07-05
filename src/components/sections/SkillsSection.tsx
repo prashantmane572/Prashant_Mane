@@ -10,25 +10,25 @@ export function SkillsSection() {
       title: "Business Intelligence",
       icon: <LineChart className="text-primary" size={32} />,
       skills: ["Power BI (DAX, Power Query)", "Data Modeling", "KPI Dashboards", "Looker Studio"],
-      progress: 95
+      // progress: 95
     },
     {
       title: "Databases & ERP",
       icon: <Database className="text-accent" size={32} />,
       skills: ["MS SQL Server", "SAP HANA", "SAP Business One", "PostgreSQL"],
-      progress: 90
+      // progress: 90
     },
     {
       title: "Data Analytics",
       icon: <Server className="text-highlight" size={32} />,
       skills: ["Inventory Analytics", "Sales Operations", "Data Cleaning", "MIS Automation"],
-      progress: 85
+      // progress: 85
     },
     {
       title: "Programming & Tools",
       icon: <Code2 className="text-slate-600" size={32} />,
       skills: ["Python (Pandas, NumPy)", "Advanced Excel", "Git & GitHub", "VBA"],
-      progress: 80
+      // progress: 80
     }
   ];
 
@@ -69,7 +69,7 @@ export function SkillsSection() {
                   ))}
                 </ul>
 
-                <div className="mt-auto">
+                {/* <div className="mt-auto">
                   <div className="flex justify-between text-xs font-semibold text-slate-500 mb-2">
                     <span>Proficiency</span>
                     <span>{category.progress}%</span>
@@ -83,7 +83,7 @@ export function SkillsSection() {
                       transition={{ duration: 1, delay: 0.5 }}
                     ></motion.div>
                   </div>
-                </div>
+                </div> */}
               </AnimatedCard>
             </FadeIn>
           ))}
